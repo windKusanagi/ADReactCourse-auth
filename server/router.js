@@ -1,5 +1,10 @@
-const Authentication = require('./controllers/authentication');
+import { signup } from "./controllers/authentication";
+import "./services/passport";
+import passport from "passport";
 
-module.exports = function (app){
-    app.post('/signup', Authentication.signup);
+const requireAuth = passport.authenticate("jwt", { session: false });
+
+export default app => {
+	app.get("/", requireAuth, (req, res) => res.send({ hi: "there" }));
+	app.post("/signup", signup);
 };
