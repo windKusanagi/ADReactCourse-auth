@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 import bcrypt from "bcrypt-nodejs";
+
 // Define our model
 const userSchema = new Schema({
 	email: { type: String, unique: true, lowercase: true },
@@ -28,6 +29,13 @@ userSchema.pre("save", function(next){
 		});
 	});
 });
+
+userSchema.methods.comparePassword = function(candidatePassword, callback){
+	bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
+		if (err) return callback(err)
+		callback(null, isMatch)
+	})
+}
 
 // Create the model class
 const ModelClass = mongoose.model("user", userSchema);
