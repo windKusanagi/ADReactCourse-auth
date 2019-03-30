@@ -6,9 +6,10 @@ import router from "./router";
 import { connect } from "mongoose";
 import mongoAltasUrl from "./config/mongodbConnection";
 const app = express();
-
+import cors from 'cors';
 // App Setip
 app.use(morgan("combined"));
+app.use(cors());
 app.use(json({ type: "*/*" }));
 router(app);
 
