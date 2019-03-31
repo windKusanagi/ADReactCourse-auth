@@ -6,6 +6,7 @@ import Welcome from "./components/Welcome";
 import Signin from "./components/auth/Signin";
 import Signup from "./components/auth/Signup";
 import Features from "./components/Features";
+import Signout from "./components/auth/Signout";
  
 class App extends Component {
 	render() {
@@ -17,6 +18,7 @@ class App extends Component {
                     <Route path="/signin" component={Signin}/>
                     <Route path="/signup" component={Signup}/>
                     <Route path="/features" component={Features}/>
+                    <Route path="/signout" component={Signout}/>
                 </Switch>
 			</div>
 		);

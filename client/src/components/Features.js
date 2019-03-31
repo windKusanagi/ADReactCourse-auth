@@ -1,4 +1,5 @@
 import React from 'react'
+import requireAuth from './requireAuth';
 
 const Features = () => {
   return (
@@ -8,4 +9,4 @@ const Features = () => {
   )
 }
 
-export default Features
+export default requireAuth(Features);

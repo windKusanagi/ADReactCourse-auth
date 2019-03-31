@@ -7,11 +7,13 @@ import { signup } from "../../stores/actions/authActions";
 
 class Signup extends Component {
     onSubmit = formProps => {
-        this.props.signup(formProps);
+        this.props.signup(formProps, () => {
+            this.props.history.push('/features')
+        });
     };
 
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, auth } = this.props;
 
         return (
             <form onSubmit={handleSubmit(this.onSubmit)}>
@@ -33,7 +35,8 @@ class Signup extends Component {
                         autoComplete="none"
                     />
                 </fieldset>
-                <button>Sign up!</button>
+                {auth.errMsg && <h3>{auth.errMsg}</h3>}
+                <button style={{ marginRight: "30px" }}>Sign up!</button>
             </form>
         );
     }
@@ -46,7 +49,7 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        signup: formProps => dispatch(signup(formProps))
+        signup: (formProps, callback) => dispatch(signup(formProps, callback))
     };
 };
 export default compose(

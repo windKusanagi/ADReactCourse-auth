@@ -8,7 +8,13 @@ import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./stores/reducers/rootReducer";
 import thunk from "redux-thunk";
 
-const store = createStore(rootReducer, {}, applyMiddleware(thunk));
+const store = createStore(
+    rootReducer,
+    {
+        auth: { authenticated: localStorage.getItem("token"), errMsg: null }
+    },
+    applyMiddleware(thunk)
+);
 
 ReactDOM.render(
     <Provider store={store}>
